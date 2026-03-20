@@ -285,6 +285,9 @@ def GetPackageMetadata(target_info, source_info=None):
   # consider skipping them if they aren't used by clients.
   UpdateDeviceState(metadata_proto.postcondition, target_info,
                     boot_variable_values, True)
+                    
+  del metadata_proto.postcondition.device[:]
+  metadata_proto.postcondition.device.extend(["moonstone", "sunstone", "stone"])
 
   if target_info.is_ab and not OPTIONS.force_non_ab:
     metadata_proto.type = ota_metadata_pb2.OtaMetadata.AB
